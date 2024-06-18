@@ -1,8 +1,5 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
-@using Umbraco.Web.Models
 @{
-    var homePage = Model.AncestorOrSelf<Home>();
-
     var heroImageUrl = Model.Value<IPublishedContent>("heroImage").Url;
 }
 <style>
