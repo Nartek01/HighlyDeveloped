@@ -286,6 +286,7 @@
     <Content Include="config\Lang\zh-CN.user.xml" />
     <Content Include="config\logviewer.searches.config.js" />
     <Content Include="css\CookieConsent.css" />
+    <Content Include="css\RTE.css" />
     <Content Include="Global.asax" />
     <Content Include="ReadMe.txt" />
     <Content Include="scripts\CookieConsent.js" />
