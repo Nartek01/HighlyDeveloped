@@ -1,4 +1,10 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web.Models
+@{
+    var homePage = Model.AncestorOrSelf<Home>();
+
+    var heroImageUrl = Model.Value<IPublishedContent>("heroImage").Url;
+}
 <style>
     .home-hero {
         background: no-repeat center center;
@@ -8,28 +14,28 @@
         color: white;
     }
 
-    .home-hero > .overlay {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(31, 3, 103, 0.80);
-        z-index: 1;
-    }
+        .home-hero > .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(31, 3, 103, 0.80);
+            z-index: 1;
+        }
 
-    .home-hero > .inner {
-        position: relative;
-        z-index: 2;
-    }
+        .home-hero > .inner {
+            position: relative;
+            z-index: 2;
+        }
 </style>
 <div>
-    <div class="home-hero jumbotron jumbotron-fluid" style="background-image: url('/images/high_rise.jpg')">
+    <div class="home-hero jumbotron jumbotron-fluid" style="background-image: url(@heroImageUrl)">
         <div class="overlay"></div>
         <div class="inner">
             <div class="container">
-                <h1 class="display-4">Fluid jumbotron</h1>
-                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                <h1 class="display-4">@Model.Value("heroTitle")</h1>
+                <p class="lead">@Model.Value("heroSubtitle")</p>
             </div>
         </div>
     </div>
