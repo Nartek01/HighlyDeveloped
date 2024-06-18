@@ -1,6 +1,5 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
 @using ContentModels = Umbraco.Web.PublishedModels;
-@using Umbraco.Core.PropertyEditors.ValueConverters;
 @{
     Layout = "main.cshtml";
 }
@@ -8,36 +7,3 @@
 @Html.Partial("Hero");
 
 @Html.Partial("CallToAction");
-
-
-@{
-    var latestNews = Umbraco.Content(Guid.Parse("f362853f-060d-46a8-9303-63e75a6bc6a4"))
-    .ChildrenOfType("newsArticle")
-    .Where(x => x.IsVisible())
-    .OrderByDescending(x => x.CreateDate)
-    .Take(3);
-}
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="card-deck">
-                @{
-                    foreach (var item in latestNews)
-                    {
-                        var croppedImage = item.Value<ImageCropperValue>("articleImage");
-                        var thumbUrl = croppedImage.Src + croppedImage.GetCropUrl("Thumbnail");
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src=@thumbUrl alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">@item.Name</h5>
-                                <p class="card-text">@item.Value("leadIn")</p>
-                                <a href=@item.Url class="btn btn-primary">Read more</a>
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-        </div>
-    </div>
-</div>
