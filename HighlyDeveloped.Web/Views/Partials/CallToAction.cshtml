@@ -1,0 +1,23 @@
+@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web.Models
+<section class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col text-black py-5">
+                <h1 class="display-4">@Model.Value("calltoActionTitle")</h1>
+                <p class="lead">@Model.Value("calltoActionText")</p>
+                @{
+                    var link = Model.Value<Link>("callToActionLink");
+                    if (link != null)
+                    {
+                        <a href="@link.Url"
+                           target="@link.Target"
+                           class="btn btn-outline-secondary"
+                           >@link.Name</a>
+                    }
+                }
+                <!-- Button for CTA -->
+            </div>
+        </div>
+    </div>
+</section>

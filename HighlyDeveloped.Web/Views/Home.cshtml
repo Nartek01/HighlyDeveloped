@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "main.cshtml";
+}
+
+@Html.Partial("Hero");
+
+@Html.Partial("CallToAction");
+
+
+@{
+	var latestNews = Umbraco.Content(Guid.Parse("f362853f-060d-46a8-9303-63e75a6bc6a4"))
+    .ChildrenOfType("newsArticle")
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate);
+}
+<ul>
+	@foreach (var item in latestNews)
+	{
+		<li>
+			<a href="@item.Url">@item.Name</a>
+		</li>
+	}
+</ul>
+
