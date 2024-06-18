@@ -319,6 +319,11 @@
     <Content Include="Views\main.cshtml" />
     <Content Include="Views\NewsArticle.cshtml" />
     <Content Include="Views\Contact.cshtml" />
+    <Content Include="Views\NewsArticles.cshtml" />
+    <Content Include="Views\Partials\CallToAction.cshtml" />
+    <Content Include="Views\Partials\Footer.cshtml" />
+    <Content Include="Views\Partials\Hero.cshtml" />
+    <Content Include="Views\Partials\NavBar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
