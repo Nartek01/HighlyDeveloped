@@ -52,7 +52,10 @@
     }
     @Html.RenderCssHere()
 </head>
-@Html.Partial($"NavBar")
+@if(!Model.Value<bool>("umbracoNaviHide"))
+{
+    @Html.Partial($"NavBar")
+}
 <body>
 @RenderBody()
 <div class="alert text-center cookiealert" role="alert">
