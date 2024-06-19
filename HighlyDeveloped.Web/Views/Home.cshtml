@@ -4,11 +4,22 @@
     Layout = "main.cshtml";
 }
 
+<!-- Hero Image-->
 @Html.Partial("Hero");
+
+<!--Call to Action-->
 @Html.Partial("CallToAction")
+
+<!-- Latest News-->
 @Html.Partial("LatestNews");
 
 @* Latest Tweets *@
+@*Home.cshtml*@
 <div class="container">
-    @Umbraco.RenderMacro("GetLatestTweets", new { twitterHandle = "InstantGamingEN" })
+    @*Html.Action args
+        "GetTweets" metod att anropa
+        "Twitter" matchar mot TwitterController automatiskt. Den tarbort "Controller" delen
+        "twitterHandle" argument för GetTweets metoden (måste också förbereds i GetTweets metod innan)
+    *@
+    @Html.Action("GetTweets", "Twitter", new { twitterHandle = "InstantGamingEN" })
 </div>
