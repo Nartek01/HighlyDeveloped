@@ -15,6 +15,24 @@ namespace HighlyDeveloped.Core.Controllers
         {
             string PARTIAL_VIEW_FOLDER = "~/Views/Partials";
 
+            // Create the view model and init it
+            var twitterViewModel = new TwitterViewModel();
+            twitterViewModel.TwitterHandle = twitterHandle;
+
+            // Grab the tweet data from the twitter API
+            try
+            {
+                var tweets = GetLatestTweets(twitterHandle, 4);
+                twitterViewModel.Json = tweets;
+                twitterViewModel.Error = false;
+            }
+            catch (Exception error)
+            {
+                twitterViewModel.Error = true;
+                twitterViewModel.Message = "Something went wrong " + error.Message + error.StackTrace;
+            }
+            // Return the view
+
             return PartialView(PARTIAL_VIEW_FOLDER + "/Latest Tweets.cshtml", twitterHandle);
         }
 
