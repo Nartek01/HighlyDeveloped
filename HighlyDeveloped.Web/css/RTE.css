@@ -2,5 +2,15 @@
 
 /**umb_name:Heading 1*/
 .heading1 {
-	font-size: 32px;
+	font-size: 2.25rem;
+}
+
+/**umb_name:Heading 2 */
+.heading2 {
+	font-size: 1.75rem;
+}
+
+/**umb_name:Heading 3 */
+.heading3 {
+	font-size: 1.125rem;
 }
