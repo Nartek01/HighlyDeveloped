@@ -1,0 +1,16 @@
+﻿@model HighlyDeveloped.Core.ViewModel.ContactFormViewModel
+@using HighlyDeveloped.Core.Controllers
+@using (Html.BeginUmbracoForm<ContactController>("HandleContactForm"))
+{
+    @Html.ValidationSummary();
+    @Html.AntiForgeryToken();
+
+    <div class="form-group">
+        <label for="your-name-textbox">Your namae *</label>
+        <span class="field-validation-valid" data-valmsg-for="Nmae" data-valmsg-replace="true"></span>
+        @*
+            *M står för "model", i det här fallet är det "ContactForm"ViewModel.
+        *@
+        @Html.TextBoxFor(m => m.Name, { @class = "form-control form-control-lg", placeholder = "Your Name", maxlength = "80"})
+    </div>
+}
