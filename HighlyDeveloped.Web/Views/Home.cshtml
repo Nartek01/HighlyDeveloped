@@ -12,14 +12,3 @@
 
 <!-- Latest News-->
 @Html.Partial("LatestNews");
-
-@* Latest Tweets *@
-@*Home.cshtml*@
-<div class="container">
-    @*Html.Action args
-        "GetTweets" metod att anropa
-        "Twitter" matchar mot TwitterController automatiskt. Den tarbort "Controller" delen
-        "twitterHandle" argument för GetTweets metoden (måste också förbereds i GetTweets metod innan)
-    *@
-    @Html.Action("GetTweets", "Twitter", new { twitterHandle = "InstantGamingEN" })
-</div>
