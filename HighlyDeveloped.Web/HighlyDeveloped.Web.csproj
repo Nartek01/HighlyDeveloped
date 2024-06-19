@@ -292,6 +292,7 @@
     <Content Include="scripts\CookieConsent.js" />
     <Content Include="Views\ContentPage.cshtml" />
     <Content Include="Views\MacroPartials\Call to Action Macro.cshtml" />
+    <Content Include="Views\MacroPartials\Contact Form.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
