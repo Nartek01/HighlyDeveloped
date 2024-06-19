@@ -1,4 +1,11 @@
-﻿using HighlyDeveloped.Core.ViewModel;
+﻿/** 
+ * ContactController.cs
+ * 
+ * This is a C# controller class that handles the logic and flow of the Contact Form.cshtml, It has two methods (class functions)... RenderContactForm(): This method is responsible of creating an instance of the ContactFormViewModel and passing it to the Contact Form.cshtml view (view file), so that the view can render the form with the appropriate fields.
+ * 
+ * HandleContactForm(): This method is called when the user submits the form. It receives the form data (as an instance of ContactFormViewModel) and can perform any necessary actions, such as sending an email or saving the data to a database.
+ */
+using HighlyDeveloped.Core.ViewModel;
 using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 
