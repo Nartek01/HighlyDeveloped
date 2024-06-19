@@ -1,1 +1,29 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var title = Model.MacroParameters["callToActionTitle"] as string;
+    var text = Model.MacroParameters["callToActionText"] as string;
+    var linkUdi = Model.MacroParameters["callToActionLink"]; // UDI ref
+    var linkContent = Umbraco.Content(linkUdi);
+    
+}
+
+<section class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center py-5">
+                <h1 class="display-4">@title</h1>
+                <p class="lead">@text</p>
+                @{
+                    if (linkContent != null)
+                    {
+                        <a href="@linkContent.Url"
+                           class="btn btn-outline-secondary">
+                            @linkContent.Name
+                        </a>
+                    }
+                }
+                <!-- Button for CTA -->
+            </div>
+        </div>
+    </div>
+</section>
