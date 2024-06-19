@@ -7,3 +7,8 @@
 @Html.Partial("Hero");
 @Html.Partial("CallToAction")
 @Html.Partial("LatestNews");
+
+@* Latest Tweets *@
+<div class="container">
+    @Umbraco.RenderMacro("GetLatestTweets", new { twitterHandle = "InstantGamingEN" })
+</div>
