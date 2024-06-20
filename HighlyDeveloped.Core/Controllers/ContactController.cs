@@ -32,12 +32,22 @@ namespace HighlyDeveloped.Core.Controllers
                 ModelState.AddModelError("Error", "Please check the form.");
                 return CurrentUmbracoPage();
             }
-           // Create a new contact form in umbraco
-           // Send out an email to the site admin
-           // Return confirmation message to the user
-
-            return CurrentUmbracoPage();
+            // Create a new contact form in umbraco
+            // Get a handle to Contact Forms
+            var contactForms = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("contactForms").FirstOrDefault();
+            if (contactForms != null)
+            {
                 var newContact = Services.ContentService.Create(viewModel.Name, contactForms.Id, "contactForm");
+                newContact.SetValue("contactName", viewModel.Name);
+                newContact.SetValue("contactEmail", viewModel.EmailAddress);
+                newContact.SetValue("contactSubject", viewModel.Subject);
+                newContact.SetValue("contactComment", viewModel.Comment);
+                Services.ContentService.SaveAndPublish(newContact);
+            }
+            // Send out an email to the site admin
+            // Return confirmation message to the user
+            TempData["status"] = "OK";
+            return RedirectToCurrentUmbracoPage();
         }
     }
 }
