@@ -32,6 +32,9 @@ namespace HighlyDeveloped.Core.Controllers
                 ModelState.AddModelError("Error", "Please check the form.");
                 return CurrentUmbracoPage();
             }
+           // Create a new contact form in umbraco
+           // Send out an email to the site admin
+           // Return confirmation message to the user
 
             return null;
         }
