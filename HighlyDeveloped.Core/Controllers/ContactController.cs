@@ -59,6 +59,8 @@ namespace HighlyDeveloped.Core.Controllers
             }
             catch (Exception Error)
             {
+                Logger.Error<ContactController>("Something went wrong", Error.Message);
+                ModelState.AddModelError("Error", "Sorry there was a problem noting your details, would you please try again later?");
             }
 
             return CurrentUmbracoPage();
