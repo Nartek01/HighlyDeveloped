@@ -66,13 +66,41 @@ namespace HighlyDeveloped.Core.Controllers
 
             return CurrentUmbracoPage();
         }
+        //Summary
+        // This will send out an email to site admins saying contact form has been submitted
+        //Summary
+
         private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
         {
+            // Get siteSettings and read the email from and to addresses
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings == null)
             {
                 throw new Exception("Site Settings not found or there are no site settings");
+            }
+
+            var fromAddress = siteSettings.Value("emailSettingsFromAddress");
+            var toAddress = siteSettings.Value("emailSettingsAdminAccounts");
+
+            if (string.IsNullOrEmpty((string)fromAddress))
+            {
+                throw new Exception("There needs to be atleast one admin accounts in site settings...");
+            }
+
+            if (string.IsNullOrEmpty((string)toAddress))
+            {
+                throw new Exception("There needs to be a 'to address' in site settings...");
+            }
+            // Construct the actual email
+            var emailSubject = "There has been a contact form submitted";
+            var emailBody = $"A new contact form has been received from {viewModel.Name}";
             var smtpMessage = new MailMessage();
+            smtpMessage.Subject = emailSubject;
+            smtpMessage.Body = emailBody;
+            smtpMessage.From = (MailAddress)fromAddress;
+            smtpMessage.To = (MailAddress)toAddress;
+
+            // Send via email service
         }
     }
 }
