@@ -36,7 +36,7 @@ namespace HighlyDeveloped.Core.Controllers
            // Send out an email to the site admin
            // Return confirmation message to the user
 
-            return null;
+            return CurrentUmbracoPage();
         }
     }
 }
