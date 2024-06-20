@@ -66,6 +66,10 @@ namespace HighlyDeveloped.Core.Controllers
 
             return CurrentUmbracoPage();
         }
+            var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
+            if (siteSettings == null)
+            {
+                throw new Exception("Site Settings not found or there are no site settings");
             var smtpMessage = new MailMessage();
     }
 }
