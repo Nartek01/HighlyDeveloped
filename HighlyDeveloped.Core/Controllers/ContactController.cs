@@ -66,10 +66,13 @@ namespace HighlyDeveloped.Core.Controllers
 
             return CurrentUmbracoPage();
         }
+        private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
+        {
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings == null)
             {
                 throw new Exception("Site Settings not found or there are no site settings");
             var smtpMessage = new MailMessage();
+        }
     }
 }
