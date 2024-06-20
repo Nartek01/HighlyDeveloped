@@ -6,40 +6,59 @@
 }
 @if ((string)TempData["status"] == "OK")
 {
-    @Html.ValidationSummary()
-    @Html.AntiForgeryToken()
-
-    //Name
-    <div class="form-group">
-        <label for="your-name-textbox">Your name *</label>
-        <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control form-control-lg", placeholder = "Your Name", maxlength = "80" })
+    //TODO Show ok message
+    <div class="container">
+        <div class="row">
+            <div class="col text-center p-5">
+                <i class="far fa-5x fa-thumbs-up"></i>
+                <div>
+                    Thanks for your comments!
+                </div>
+            </div>
+        </div>
     </div>
+}
+else
+{
+    //TODO Render the form
 
-    //Email
-    <div class="form-group">
-        <label for="your-email-adress-textbox">Your email *</label>
-        <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control form-control-lg", placeholder = "Your Email"})
-    </div>
+    using (Html.BeginUmbracoForm<ContactController>("HandleContactForm"))
+    {
+        @Html.ValidationSummary()
+        @Html.AntiForgeryToken()
 
-    // Subject
-    <div class="form-group">
-        <label for="your-subject-textbox">Subject of enquiry</label>
-        <span class="field-validation-valid"></span>
-        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control form-control-lg", placeholder = "Subject of enquiry", maxlength = "255" })
-    </div>
+        //Name
+        <div class="form-group">
+            <label for="your-name-textbox">Your name *</label>
+            <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control form-control-lg", placeholder = "Your Name", maxlength = "80" })
+        </div>
 
-    // Comment
-    <div class="form-group">
-        <label for="your-comments-textbox">Comments</label>
-        <span class="field-validation-valid"></span>
-        @Html.TextAreaFor(m => m.Comment, new { @class = "form-control form-control-lg", placeholder = "Your Comments", maxlength = "500" })
-    </div>
+        //Email
+        <div class="form-group">
+            <label for="your-email-adress-textbox">Your email *</label>
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control form-control-lg", placeholder = "Your Email" })
+        </div>
 
-    //Put the rest of the form elements
+        // Subject
+        <div class="form-group">
+            <label for="your-subject-textbox">Subject of enquiry</label>
+            <span class="field-validation-valid"></span>
+            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control form-control-lg", placeholder = "Subject of enquiry", maxlength = "255" })
+        </div>
 
-    <div class="form-group">
-        <button class="btn btn-outline-primary btn-lg" type="submit">Send</button>
-    </div>
+        // Comment
+        <div class="form-group">
+            <label for="your-comment-textbox">Comment</label>
+            <span class="field-validation-valid"></span>
+            @Html.TextAreaFor(m => m.Comment, new { @class = "form-control form-control-lg", placeholder = "Your Comments", maxlength = "500" })
+        </div>
+
+        //Put the rest of the form elements
+
+        <div class="form-group">
+            <button class="btn btn-outline-primary btn-lg" type="submit">Send</button>
+        </div>
+    }
 }
