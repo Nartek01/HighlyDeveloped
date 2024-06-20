@@ -37,6 +37,7 @@ namespace HighlyDeveloped.Core.Controllers
            // Return confirmation message to the user
 
             return CurrentUmbracoPage();
+                var newContact = Services.ContentService.Create(viewModel.Name, contactForms.Id, "contactForm");
         }
     }
 }
