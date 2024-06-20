@@ -1,16 +1,45 @@
 ﻿@model HighlyDeveloped.Core.ViewModel.ContactFormViewModel
 @using HighlyDeveloped.Core.Controllers
+@{ 
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
 @using (Html.BeginUmbracoForm<ContactController>("HandleContactForm"))
 {
-    @Html.ValidationSummary();
-    @Html.AntiForgeryToken();
+    @Html.ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    //Name
+    <div class="form-group">
+        <label for="your-name-textbox">Your name *</label>
+        <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control form-control-lg", placeholder = "Your Name", maxlength = "80" })
+    </div>
+
+    //Email
+    <div class="form-group">
+        <label for="your-email-adress-textbox">Your email *</label>
+        <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control form-control-lg", placeholder = "Your Email"})
+    </div>
+
+    // Subject
+    <div class="form-group">
+        <label for="your-subject-textbox">Subject of enquiry</label>
+        <span class="field-validation-valid"></span>
+        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control form-control-lg", placeholder = "Subject of enquiry", maxlength = "255" })
+    </div>
+
+    // Comment
+    <div class="form-group">
+        <label for="your-comments-textbox">Comments</label>
+        <span class="field-validation-valid"></span>
+        @Html.TextAreaFor(m => m.Comment, new { @class = "form-control form-control-lg", placeholder = "Your Comments", maxlength = "500" })
+    </div>
+
+    //Put the rest of the form elements
 
     <div class="form-group">
-        <label for="your-name-textbox">Your namae *</label>
-        <span class="field-validation-valid" data-valmsg-for="Nmae" data-valmsg-replace="true"></span>
-        @*
-            *M står för "model", i det här fallet är det "ContactForm"ViewModel.
-        *@
-        @Html.TextBoxFor(m => m.Name, { @class = "form-control form-control-lg", placeholder = "Your Name", maxlength = "80"})
+        <button class="btn btn-outline-primary btn-lg" type="submit">Send</button>
     </div>
 }
