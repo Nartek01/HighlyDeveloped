@@ -48,6 +48,9 @@
             crossorigin = "anonymous"
         });
 
+        Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js");
+        Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js");
+
         Html.RequiresJs("/scripts/CookieConsent.js", 4);
     }
     @Html.RenderCssHere()
