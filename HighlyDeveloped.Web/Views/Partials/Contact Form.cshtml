@@ -4,7 +4,7 @@
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
 }
-@using (Html.BeginUmbracoForm<ContactController>("HandleContactForm"))
+@if ((string)TempData["status"] == "OK")
 {
     @Html.ValidationSummary()
     @Html.AntiForgeryToken()
