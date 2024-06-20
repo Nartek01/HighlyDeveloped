@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/** 
+ * ContactFormViewModel.cs
+ * 
+ * This is a C# class that represents the data model for the Contact Form.cshtml. It defines the properties (fields) that the form will have, such as "Name", "EmailAddress", "Comment and "Subject" all are properties of (?)
+ * 
+ * ContactFormViewModel.cs also includes "data annotations" such as [Required] or [MaxLength(...)]
+ */
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Umbraco.Web.Mvc;
 
 namespace HighlyDeveloped.Core.ViewModel
 {
@@ -15,7 +16,7 @@ namespace HighlyDeveloped.Core.ViewModel
         public string Name { get; set; }
         [Required]
         [EmailAddress(ErrorMessage = "Please enter a valid email adress")]
-        public string EmailAdress { get; set; }
+        public string EmailAddress { get; set; }
         [Required]
         [MaxLength(500, ErrorMessage = "Comments max length 500 characters")]
         public string Comment { get; set; }
