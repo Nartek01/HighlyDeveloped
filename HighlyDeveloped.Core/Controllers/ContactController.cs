@@ -8,6 +8,7 @@
 using HighlyDeveloped.Core.ViewModel;
 using System;
 using System.Linq;
+using System.Net.Mail;
 using System.Web.Mvc;
 using Umbraco.Core.Logging;
 using Umbraco.Web;
@@ -65,5 +66,6 @@ namespace HighlyDeveloped.Core.Controllers
 
             return CurrentUmbracoPage();
         }
+            var smtpMessage = new MailMessage();
     }
 }
