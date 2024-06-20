@@ -6,7 +6,9 @@
  * HandleContactForm(): This method is called when the user submits the form. It receives the form data (as an instance of ContactFormViewModel) and can perform any necessary actions, such as sending an email or saving the data to a database.
  */
 using HighlyDeveloped.Core.ViewModel;
+using System.Linq;
 using System.Web.Mvc;
+using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
 namespace HighlyDeveloped.Core.Controllers
