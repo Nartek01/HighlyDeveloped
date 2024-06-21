@@ -53,8 +53,12 @@ namespace HighlyDeveloped.Core.Controllers
                     Services.ContentService.SaveAndPublish(newContact);
                 }
                 // Send out an email to the site admin
+                SendContactFormReceivedEmail(viewModel);
+
+
                 // Return confirmation message to the user
                 TempData["status"] = "OK"; // This is necessary since we have an conditional that listens to this value on Contact Form.cshtml
+
                 return RedirectToCurrentUmbracoPage();
 
             }
