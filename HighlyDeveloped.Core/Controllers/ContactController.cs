@@ -108,6 +108,14 @@ namespace HighlyDeveloped.Core.Controllers
             smtpMessage.Body = emailBody;
             smtpMessage.From = (MailAddress)fromAddress;
             smtpMessage.To = (MailAddress)toAddress;
+                    smtpMessage.To.Add(item);
+                }
+            }
+            // send via email services
+            using(var smtp = new SmtpClient())
+            {
+                smtp.Send(smtpMessage);
+            }
 
                 throw new NotImplementedException();
         }
