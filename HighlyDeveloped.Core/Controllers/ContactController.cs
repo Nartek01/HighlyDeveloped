@@ -92,7 +92,7 @@ namespace HighlyDeveloped.Core.Controllers
 
             if (string.IsNullOrEmpty(fromAddress))
             {
-                throw new Exception("There needs to be atleast one admin accounts in site settings...");
+                throw new Exception("There needs to be a from address in the site settings");
             }
 
             if (string.IsNullOrEmpty((string)toAddress))
