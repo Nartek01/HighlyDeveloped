@@ -99,8 +99,9 @@ namespace HighlyDeveloped.Core.Controllers
             {
                 throw new Exception("There needs to be a to address in the site settings");
             }
-            // Construct the actual email
-            var emailSubject = "There has been a contact form submitted";
+
+            // Construct the email
+            var emailSubject = "There has been  a contact form submitted";
             var emailBody = $"A new contact form has been received from {viewModel.Name}";
             var smtpMessage = new MailMessage();
             smtpMessage.Subject = emailSubject;
