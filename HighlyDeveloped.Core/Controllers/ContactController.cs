@@ -66,9 +66,6 @@ namespace HighlyDeveloped.Core.Controllers
 
             return CurrentUmbracoPage();
         }
-        //Summary
-        // This will send out an email to site admins saying contact form has been submitted
-        //Summary
 
         private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
         {
@@ -100,7 +97,7 @@ namespace HighlyDeveloped.Core.Controllers
             smtpMessage.From = (MailAddress)fromAddress;
             smtpMessage.To = (MailAddress)toAddress;
 
-            // Send via email service
+                throw new NotImplementedException();
         }
     }
 }
