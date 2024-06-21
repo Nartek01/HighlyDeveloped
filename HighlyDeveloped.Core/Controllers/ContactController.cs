@@ -121,8 +121,6 @@ namespace HighlyDeveloped.Core.Controllers
             {
                 smtp.Send(smtpMessage);
             }
-
-                throw new NotImplementedException();
         }
     }
 }
