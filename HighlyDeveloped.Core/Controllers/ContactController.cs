@@ -117,9 +117,16 @@ namespace HighlyDeveloped.Core.Controllers
                 }
             }
             // send via email services
-            using(var smtp = new SmtpClient())
+            try
             {
-                smtp.Send(smtpMessage);
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Send(smtpMessage);
+                }
+            } catch(Exception Error)
+            {
+                Logger.Error<ContactController>("Failed to send email", Error   );
+                // Handle the error appropriately
             }
         }
     }
