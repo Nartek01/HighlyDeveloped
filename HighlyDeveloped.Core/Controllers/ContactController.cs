@@ -111,7 +111,7 @@ namespace HighlyDeveloped.Core.Controllers
             var toList = toAddresses.Split(',');
             foreach (var item in toList)
             {
-                if (string.IsNullOrEmpty(item))
+                if (!string.IsNullOrEmpty(item))
                 {
                     smtpMessage.To.Add(item);
                 }
