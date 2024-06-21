@@ -90,7 +90,7 @@ namespace HighlyDeveloped.Core.Controllers
             var fromAddress = siteSettings.Value<string>("emailSettingsFromAddress");
             var toAddresses = siteSettings.Value<string>("emailSettingsAdminAccounts");
 
-            if (string.IsNullOrEmpty((string)fromAddress))
+            if (string.IsNullOrEmpty(fromAddress))
             {
                 throw new Exception("There needs to be atleast one admin accounts in site settings...");
             }
