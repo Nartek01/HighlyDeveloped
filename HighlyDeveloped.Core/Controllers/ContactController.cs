@@ -97,7 +97,7 @@ namespace HighlyDeveloped.Core.Controllers
 
             if (string.IsNullOrEmpty(toAddresses))
             {
-                throw new Exception("There needs to be a 'to address' in site settings...");
+                throw new Exception("There needs to be a to address in the site settings");
             }
             // Construct the actual email
             var emailSubject = "There has been a contact form submitted";
