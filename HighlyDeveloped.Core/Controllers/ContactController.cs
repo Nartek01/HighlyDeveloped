@@ -84,7 +84,7 @@ namespace HighlyDeveloped.Core.Controllers
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings == null)
             {
-                throw new Exception("Site Settings not found or there are no site settings");
+                throw new Exception("There are no site settings");  
             }
 
             var fromAddress = siteSettings.Value("emailSettingsFromAddress");
