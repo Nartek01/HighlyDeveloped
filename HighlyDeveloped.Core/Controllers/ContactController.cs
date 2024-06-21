@@ -95,7 +95,7 @@ namespace HighlyDeveloped.Core.Controllers
                 throw new Exception("There needs to be a from address in the site settings");
             }
 
-            if (string.IsNullOrEmpty((string)toAddress))
+            if (string.IsNullOrEmpty(toAddresses))
             {
                 throw new Exception("There needs to be a 'to address' in site settings...");
             }
