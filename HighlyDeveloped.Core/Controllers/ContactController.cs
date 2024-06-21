@@ -87,8 +87,8 @@ namespace HighlyDeveloped.Core.Controllers
                 throw new Exception("There are no site settings");  
             }
 
-            var fromAddress = siteSettings.Value("emailSettingsFromAddress");
-            var toAddress = siteSettings.Value("emailSettingsAdminAccounts");
+            var fromAddress = siteSettings.Value<string>("emailSettingsFromAddress");
+            var toAddresses = siteSettings.Value<string>("emailSettingsAdminAccounts");
 
             if (string.IsNullOrEmpty((string)fromAddress))
             {
