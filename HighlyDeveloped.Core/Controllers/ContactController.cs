@@ -69,7 +69,14 @@ namespace HighlyDeveloped.Core.Controllers
 
         private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
         {
-            // Get siteSettings and read the email from and to addresses
+            //Summary
+            // This will send out an email to site admins.
+            //Summary
+
+
+            // Read the email from and to addresses
+            // Get the site settings
+
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings == null)
             {
