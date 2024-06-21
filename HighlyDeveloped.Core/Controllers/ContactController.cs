@@ -106,8 +106,13 @@ namespace HighlyDeveloped.Core.Controllers
             var smtpMessage = new MailMessage();
             smtpMessage.Subject = emailSubject;
             smtpMessage.Body = emailBody;
-            smtpMessage.From = (MailAddress)fromAddress;
-            smtpMessage.To = (MailAddress)toAddress;
+            smtpMessage.From = new MailAddress(fromAddress);
+
+            var toList = toAddresses.Split(',');
+            foreach (var item in toList)
+            {
+                if (string.IsNullOrEmpty(item))
+                {
                     smtpMessage.To.Add(item);
                 }
             }
