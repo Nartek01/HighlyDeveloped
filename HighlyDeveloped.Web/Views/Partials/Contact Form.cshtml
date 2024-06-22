@@ -4,6 +4,15 @@
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
 }
+<script src="https://www.google.com/recaptcha/api.js?render=@Model.ReCaptchaSiteKey"></script>
+<script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute('@Model.ReCaptchaSiteKey', { action: 'contact_us' })
+            .then(function (token) {
+                $('#GoogleCaptchaToken').val(token)
+            })
+    });
+</script>
 @if ((string)TempData["status"] == "OK")
 {
     //TODO Show ok message
@@ -56,7 +65,7 @@ else
         </div>
 
         //Put the rest of the form elements
-
+        <input type="hidden" name="GoogleCaptchaToken" id="GoogleCaptchaToken"/>
         <div class="form-group">
             <button class="btn btn-outline-primary btn-lg" type="submit">Send</button>
         </div>

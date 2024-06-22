@@ -6,8 +6,10 @@
  * HandleContactForm(): This method is called when the user submits the form. It receives the form data (as an instance of ContactFormViewModel) and can perform any necessary actions, such as sending an email or saving the data to a database.
  */
 using HighlyDeveloped.Core.ViewModel;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Web.Mvc;
 using Umbraco.Core.Logging;
@@ -18,15 +20,22 @@ namespace HighlyDeveloped.Core.Controllers
 {
     public class ContactController : SurfaceController
     {
-        //Summary
-        // This is for all operations regarding the contact form.
-        //Summary
+        /// <summary>
+        /// This is for all operations regarding the contact form.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult RenderContactForm()
         {
             var viewModel = new ContactFormViewModel();
-
-            return PartialView("~/Views/Partials/Contact Form.cshtml", viewModel);
+            // Set reCaptcha Site Key
+            var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
+            if (siteSettings != null)
+            {
+                var siteKey = siteSettings.Value<string>("reCaptchaSiteKey");
+                viewModel.ReCaptchaSiteKey = siteKey;
+            }
             // call $ @Html.Action("RenderContactForm", "Contact", new { params... });
+            return PartialView("~/Views/Partials/Contact Form.cshtml", viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -37,7 +46,18 @@ namespace HighlyDeveloped.Core.Controllers
                 ModelState.AddModelError("Error", "Please check the form.");
                 return CurrentUmbracoPage();
             }
-
+            var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
+            if(siteSettings != null)
+            {
+                var secretKey = siteSettings.Value<string>("reCaptchaSecretKey");
+                var captchaToken = Request.Form["GoogleCaptchaToken"];
+                var isCaptchaValid = IsCaptchaValid(captchaToken, secretKey);
+                if (!isCaptchaValid)
+                {
+                    ModelState.AddModelError("Captcha", "The captcha is not valid, please try again later...");
+                    return CurrentUmbracoPage();
+                }
+            }
             try
             {
                 // Create a new contact form in umbraco
@@ -71,6 +91,33 @@ namespace HighlyDeveloped.Core.Controllers
             return CurrentUmbracoPage();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="secretKey"></param>
+        /// <returns>true | false </returns>
+        private bool IsCaptchaValid(string token, string secretKey)
+        {
+            // Sending token to google api
+            HttpClient httpClient = new HttpClient();
+            var response = httpClient
+                .GetAsync($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={token}")
+                .Result;
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                return false;
+            // get response
+            string jsonResponse = response.Content.ReadAsStringAsync().Result;
+            dynamic jsonData = JObject.Parse(jsonResponse);
+            if (jsonData.success != "true")
+            {
+                return false;
+            }
+            // was good ?
+            return true;
+
+        }
+
         private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
         {
             //Summary
@@ -84,7 +131,7 @@ namespace HighlyDeveloped.Core.Controllers
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings == null)
             {
-                throw new Exception("There are no site settings");  
+                throw new Exception("There are no site settings");
             }
 
             var fromAddress = siteSettings.Value<string>("emailSettingsFromAddress");
@@ -123,9 +170,10 @@ namespace HighlyDeveloped.Core.Controllers
                 {
                     smtp.Send(smtpMessage);
                 }
-            } catch(Exception Error)
+            }
+            catch (Exception Error)
             {
-                Logger.Error<ContactController>("Failed to send email", Error   );
+                Logger.Error<ContactController>("Failed to send email", Error);
                 // Handle the error appropriately
             }
         }

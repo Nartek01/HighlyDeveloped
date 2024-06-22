@@ -22,5 +22,6 @@ namespace HighlyDeveloped.Core.ViewModel
         public string Comment { get; set; }
         [MaxLength(255, ErrorMessage = "Please try and limit to 255 characters")]
         public string Subject { get; set; }
+        public string ReCaptchaSiteKey { get; set; }
     }
 }
