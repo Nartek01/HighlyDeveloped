@@ -27,7 +27,7 @@ namespace HighlyDeveloped.Core.Controllers
         public ActionResult RenderContactForm()
         {
             var viewModel = new ContactFormViewModel();
-
+            // Set reCaptcha Site Key
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings != null)
             {
