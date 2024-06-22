@@ -18,9 +18,10 @@ namespace HighlyDeveloped.Core.Controllers
 {
     public class ContactController : SurfaceController
     {
-        //Summary
-        // This is for all operations regarding the contact form.
-        //Summary
+        /// <summary>
+        /// This is for all operations regarding the contact form.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult RenderContactForm()
         {
             var viewModel = new ContactFormViewModel();
