@@ -9,7 +9,7 @@
     grecaptcha.ready(function () {
         grecaptcha.execute('@Model.ReCaptchaSiteKey', { action: 'contact_us' })
             .then(function (token) {
-                $('#GoogleCaptchaToken').val()
+                $('#GoogleCaptchaToken').val(token)
             })
     });
 </script>
