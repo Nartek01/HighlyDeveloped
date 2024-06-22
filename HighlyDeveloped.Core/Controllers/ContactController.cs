@@ -26,6 +26,12 @@ namespace HighlyDeveloped.Core.Controllers
         {
             var viewModel = new ContactFormViewModel();
 
+            var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
+            if (siteSettings != null)
+            {
+                var siteKey = siteSettings.Value("reCaptchaSiteKey");
+                var siteKeySecret = siteSettings.Value("reCaptchaSecretKey");
+            }
             return PartialView("~/Views/Partials/Contact Form.cshtml", viewModel);
             // call $ @Html.Action("RenderContactForm", "Contact", new { params... });
         }
