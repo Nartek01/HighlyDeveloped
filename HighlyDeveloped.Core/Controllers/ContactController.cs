@@ -34,8 +34,8 @@ namespace HighlyDeveloped.Core.Controllers
                 var siteKey = siteSettings.Value<string>("reCaptchaSiteKey");
                 viewModel.ReCaptchaSiteKey = siteKey;
             }
-            return PartialView("~/Views/Partials/Contact Form.cshtml", viewModel);
             // call $ @Html.Action("RenderContactForm", "Contact", new { params... });
+            return PartialView("~/Views/Partials/Contact Form.cshtml", viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
