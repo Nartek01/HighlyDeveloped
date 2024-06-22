@@ -31,8 +31,8 @@ namespace HighlyDeveloped.Core.Controllers
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings != null)
             {
-                var siteKey = siteSettings.Value("reCaptchaSiteKey");
-                var siteKeySecret = siteSettings.Value("reCaptchaSecretKey");
+                var siteKey = siteSettings.Value<string>("reCaptchaSiteKey");
+                viewModel.ReCaptchaSiteKey = siteKey;
             }
             return PartialView("~/Views/Partials/Contact Form.cshtml", viewModel);
             // call $ @Html.Action("RenderContactForm", "Contact", new { params... });
