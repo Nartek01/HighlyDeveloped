@@ -83,6 +83,15 @@ namespace HighlyDeveloped.Core.Controllers
 
             return CurrentUmbracoPage();
         }
+        /// <summary>
+        /// Perform a captcha validation check
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        private bool IsCaptchaValid(string v)
+        {
+            throw new NotImplementedException();
+        }
 
         private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
         {
