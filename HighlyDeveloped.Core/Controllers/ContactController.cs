@@ -44,6 +44,12 @@ namespace HighlyDeveloped.Core.Controllers
                 ModelState.AddModelError("Error", "Please check the form.");
                 return CurrentUmbracoPage();
             }
+            var isCaptchaValid = IsCaptchaValid(Request.Form["GoogleCaptchaToken"]);
+            if(!isCaptchaValid)
+            {
+                ModelState.AddModelError("Captcha", "The captcha is not valid, please try again later...");
+                return CurrentUmbracoPage();
+            }
 
             try
             {
