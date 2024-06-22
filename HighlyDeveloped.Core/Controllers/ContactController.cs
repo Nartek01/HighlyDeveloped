@@ -46,13 +46,18 @@ namespace HighlyDeveloped.Core.Controllers
                 ModelState.AddModelError("Error", "Please check the form.");
                 return CurrentUmbracoPage();
             }
-            var isCaptchaValid = IsCaptchaValid(Request.Form["GoogleCaptchaToken"]);
-            if(!isCaptchaValid)
+            var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
+            if(siteSettings != null)
             {
-                ModelState.AddModelError("Captcha", "The captcha is not valid, please try again later...");
-                return CurrentUmbracoPage();
+                var secretKey = siteSettings.Value<string>("reCaptchaSecretKey");
+                var captchaToken = Request.Form["GoogleCaptchaToken"];
+                var isCaptchaValid = IsCaptchaValid(captchaToken, secretKey);
+                if (!isCaptchaValid)
+                {
+                    ModelState.AddModelError("Captcha", "The captcha is not valid, please try again later...");
+                    return CurrentUmbracoPage();
+                }
             }
-
             try
             {
                 // Create a new contact form in umbraco
@@ -85,14 +90,32 @@ namespace HighlyDeveloped.Core.Controllers
 
             return CurrentUmbracoPage();
         }
+
         /// <summary>
-        /// Perform a captcha validation check
+        /// 
         /// </summary>
-        /// <param name="v"></param>
-        /// <returns></returns>
-        private bool IsCaptchaValid(string v)
+        /// <param name="token"></param>
+        /// <param name="secretKey"></param>
+        /// <returns>true | false </returns>
+        private bool IsCaptchaValid(string token, string secretKey)
         {
-            throw new NotImplementedException();
+            // Sending token to google api
+            HttpClient httpClient = new HttpClient();
+            var response = httpClient
+                .GetAsync($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={token}")
+                .Result;
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                return false;
+            // get response
+            string jsonResponse = response.Content.ReadAsStringAsync().Result;
+            dynamic jsonData = JObject.Parse(jsonResponse);
+            if (jsonData.success != "true")
+            {
+                return false;
+            }
+            // was good ?
+            return true;
+
         }
 
         private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
@@ -108,7 +131,7 @@ namespace HighlyDeveloped.Core.Controllers
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
             if (siteSettings == null)
             {
-                throw new Exception("There are no site settings");  
+                throw new Exception("There are no site settings");
             }
 
             var fromAddress = siteSettings.Value<string>("emailSettingsFromAddress");
@@ -147,9 +170,10 @@ namespace HighlyDeveloped.Core.Controllers
                 {
                     smtp.Send(smtpMessage);
                 }
-            } catch(Exception Error)
+            }
+            catch (Exception Error)
             {
-                Logger.Error<ContactController>("Failed to send email", Error   );
+                Logger.Error<ContactController>("Failed to send email", Error);
                 // Handle the error appropriately
             }
         }
