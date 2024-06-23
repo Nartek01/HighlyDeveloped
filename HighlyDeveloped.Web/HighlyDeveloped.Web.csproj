@@ -332,6 +332,7 @@
     <Content Include="Views\Partials\NavBar.cshtml" />
     <Content Include="Views\Partials\LatestNews.cshtml" />
     <Content Include="Views\Partials\Contact Form.cshtml" />
+    <Content Include="Views\MacroPartials\Useful Links.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
