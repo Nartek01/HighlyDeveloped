@@ -1,5 +1,17 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.NewsArticle>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
-	Layout = null;
+    Layout = "main.cshtml";
 }
+@Model.Author
+<br />
+@Model.PostDate
+<br />
+@Model.LeadIn
+<br />
+@Model.ArticleImage
+<br />
+@Model.ArticleContent
+<br />
+@Model.NewsCategories
+<br />
