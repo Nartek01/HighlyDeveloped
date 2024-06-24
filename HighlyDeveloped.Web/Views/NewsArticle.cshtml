@@ -6,7 +6,15 @@
     var imgCropper = Model.Value<ImageCropperValue>("articleImage");
     var imgUrl = imgCropper.Src + imgCropper.GetCropUrl("Main");
     var articleUrl = Model.Url(null, UrlMode.Absolute);
+    var siteUrl = Request.Url.GetLeftPart(UriPartial.Authority);
 }
+@section head {
+    <meta property="og:title" content="@Model.Name" />
+    <meta property="og:description" content="@Model.LeadIn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="@siteUrl@Model.ArticleImage" />
+}
+
 <article class="container">
     <header class="text-center">
         <div class="row">
