@@ -55,6 +55,8 @@
         Html.RequiresJs("/scripts/CookieConsent.js", 4);
     }
     @Html.RenderCssHere()
+
+    @RenderSection("head", false);
 </head>
 @if(!Model.Value<bool>("umbracoNaviHide"))
 {
