@@ -130,6 +130,7 @@ else if (relatedArticles != null && relatedArticles.Count < 3)
             <div class="col">
                 <h2>Related Articles</h2>
                 <div class="card-deck"
+                     style="@(relatedArticles.Count == 1 ? "max-width: 33.333%" : "max-width: 66.666%")">
                     @foreach (var article in relatedArticles)
                     {
                         var relatedImageCropped = article.Value<ImageCropperValue>("articleImage");
