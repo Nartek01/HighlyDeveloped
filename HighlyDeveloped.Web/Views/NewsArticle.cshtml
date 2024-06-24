@@ -49,4 +49,34 @@
             </div>
         </div>
     </header>
+    <footer class="border d-flex flex-column flex-md-row justify-content-between mt-5 mb-5">
+        <div class="d-flex align-item-center px-4">
+            <div class="d-flex flex-column">
+                <div class="d-flex">
+                    <span>Author: <strong>@Model.Author</strong></span>
+                </div>
+                <div class="d-flex">
+                    <span>Categories: @string.Join(",", Model.NewsCategories)</span>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-item-center px-4">
+            <span class="align-self-center">Share this article</span>
+            <div class="btn--socialsquare btn btn-outline-secondary m-2">
+                <a class="mx-2" href="https://twitter.com/intent/tweet?text=@Model.Name&amp;url=@articleUrl">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <div class="btn--socialsquare btn btn-outline-secondary m-2">
+                <a class="mx-2" href="https://twitter.com/intent/tweet?text=@Model.Name&amp;url=@articleUrl">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <div class="btn--socialsquare btn btn-outline-secondary m-2">
+                <a class="mx-2" href="https://twitter.com/intent/tweet?text=@Model.Name&amp;url=@articleUrl">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
 </article>
