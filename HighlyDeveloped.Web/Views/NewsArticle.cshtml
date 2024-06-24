@@ -7,6 +7,8 @@
     var imgUrl = imgCropper.Src + imgCropper.GetCropUrl("Main");
     var articleUrl = Model.Url(null, UrlMode.Absolute);
     var siteUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+    var relatedArticles = Model.Value<IList<IPublishedContent>>("articleRelatedContent");
 }
 @section head {
     <meta property="og:title" content="@Model.Name" />
@@ -82,3 +84,79 @@
         </div>
     </footer>
 </article>
+
+@* Add a Related news section *@
+@if (relatedArticles != null && relatedArticles.Count > 2)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Related Articles</h2>
+                <div class="card-deck">
+                    @foreach (var article in relatedArticles)
+                    {
+                        var relatedImageCropped = article.Value<ImageCropperValue>("articleImage");
+                        var thumbUrl = relatedImageCropped.Src + relatedImageCropped.GetCropUrl("Thumbnail");
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src=@thumbUrl alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@article.Name</h5>
+                                <p class="card-text">@article.Value("leadIn")</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-articles-center">
+                                <div>
+                                    <a href=@article.Url class="btn btn-primary">Read more</a>
+                                </div>
+                                <div class="social-icons text-muted">
+                                    <a href="https://www.facebook.com/sharer.php?u=@article.Url(null, UrlMode.Absolute)" class="ml-2 mr-2">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=@article.Url(null, UrlMode.Absolute)" class="ml-2 mr-2">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else if (relatedArticles != null && relatedArticles.Count < 3)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Related Articles</h2>
+                <div class="card-deck"
+                    @foreach (var article in relatedArticles)
+                    {
+                        var relatedImageCropped = article.Value<ImageCropperValue>("articleImage");
+                        var thumbUrl = relatedImageCropped.Src + relatedImageCropped.GetCropUrl("Thumbnail");
+                        <div class="card" style="width: 2rem;">
+                            <img class="card-img-top" src=@thumbUrl alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@article.Name</h5>
+                                <p class="card-text">@article.Value("leadIn")</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between align-articles-center">
+                                <div>
+                                    <a href=@article.Url class="btn btn-primary">Read more</a>
+                                </div>
+                                <div class="social-icons text-muted">
+                                    <a href="https://www.facebook.com/sharer.php?u=@article.Url(null, UrlMode.Absolute)" class="ml-2 mr-2">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=@article.Url(null, UrlMode.Absolute)" class="ml-2 mr-2">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
