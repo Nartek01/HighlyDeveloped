@@ -1,7 +1,11 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.NewsArticle>
 @using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Core.PropertyEditors.ValueConverters;
 @{
     Layout = "main.cshtml";
+    var imgCropper = Model.Value<ImageCropperValue>("articleImage");
+    var imgUrl = imgCropper.Src + imgCropper.GetCropUrl("Main");
+    var articleUrl = Model.Url(null, UrlMode.Absolute);
 }
 @Model.Author
 <br />
