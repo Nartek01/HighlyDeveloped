@@ -21,6 +21,8 @@
     
     // Hämtar kategorierna för varje nyhetsartikel från Umbraco CMS.
     var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
+    // Skapa en tom string lista
+    var categoryList = new List<string>();
 }
 <style>
 	.home-hero > .overlay {
