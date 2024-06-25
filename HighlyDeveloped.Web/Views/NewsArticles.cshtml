@@ -13,7 +13,10 @@
 
 @{
     Layout = "main.cshtml";
+    // Hämtar valda Hero Overlay Färg från Umbraco Backoffice
     var heroOverlayColour = Model.Value<string>("heroOverlayColour");
+
+    // Hämtar alla nyhetsartiklar från Umbraco CMS. 
     var articles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("newsArticles").FirstOrDefault();
 }
 <style>
