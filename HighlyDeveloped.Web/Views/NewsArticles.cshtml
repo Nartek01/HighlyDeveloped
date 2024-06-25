@@ -18,7 +18,7 @@
 
     // Hämtar alla nyhetsartiklar från Umbraco CMS. 
     var articles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("newsArticles").FirstOrDefault();
-    
+
     // Alla kategorier
     var news = articles.Children;
 
@@ -30,11 +30,12 @@
         // to only include those where the 'newsCategories' contains the category specified in "cat".
         news = articles.Children.Where(cat => cat.Value<string[]>("newsCategories").Contains(Request.QueryString["cat"]));
     }
+
     // Hämtar kategorierna för varje nyhetsartikel från Umbraco CMS.
     var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
     // Skapa en tom string lista
     var categoryList = new List<string>();
-    
+
     // Kontrollerar om 'tags' inte är null och itererar sedan genom varje 'tagArray' i 'tags'.
     // För varje 'tag' i 'tagArray', om 'tag' inte redan finns i 'categoryList', läggs den till i listan.
     if (tags != null)
