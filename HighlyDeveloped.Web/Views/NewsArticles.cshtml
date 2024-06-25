@@ -14,3 +14,11 @@
 
 @Html.Partial("Hero")
 
+@foreach (var article in articles.Children.OrderBy(order => order.Value<DateTime>("postDate")))
+{
+    <ul>
+        <li>
+            @article.Name
+        </li>
+    </ul>
+}
