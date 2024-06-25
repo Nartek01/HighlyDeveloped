@@ -19,6 +19,8 @@
     // Hämtar alla nyhetsartiklar från Umbraco CMS. 
     var articles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("newsArticles").FirstOrDefault();
     
+    // Alla kategorier
+    var news = articles.Children;
     // Hämtar kategorierna för varje nyhetsartikel från Umbraco CMS.
     var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
     // Skapa en tom string lista
