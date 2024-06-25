@@ -107,7 +107,21 @@
                 </li>
                 @foreach (var category in categoryList.OrderBy(order => order))
                 {
-                    <li>
+                    // Skapa en tom sträng för css class
+                    var activeClass = "";
+                    
+                    // Om (cat?="value") ?cat="" parameter existerar och matchar med URLen 
+                    if (category == Request.QueryString["cat"])
+                    {
+                        // activeClass variablen få strängen "active"
+                        activeClass = "active";
+                        <Style>
+                            #@activeClass {
+                                display: none;
+                            }
+                        </Style>
+                    }
+                    <li id="@activeClass">
                         <a href="@Model.Url?cat=@category">
                             @category
                         </a>
