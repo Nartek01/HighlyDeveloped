@@ -85,7 +85,14 @@
             </div>
         </div>
         <div class="col-md-4 bg-dark text-white text-center">
-            @* Render the filer in the sidebar *@
+            @* Render the filter in the sidebar *@
+            <h3>Categories</h3>
+            <ul>
+                @foreach (var category in categoryList.OrderBy(order => order))
+                {
+                    <li>@category</li>
+                }
+            </ul>
         </div>
     </div>
 </div>
