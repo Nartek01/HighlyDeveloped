@@ -16,11 +16,17 @@
 
 @foreach (var article in articles.Children.OrderBy(order => order.Value<DateTime>("postDate")))
 {
-    <ul>
-        <li>
-            @article.Name
-        </li>
-    </ul>
+    var imageCropper = article.Value<ImageCropperValue>("articleImage");
+    var imageUrl = imageCropper.Src + imageCropper.GetCropUrl("thumb");
+
+    // Render the news card
+    <div class="card my-25">
+        <a class="card-block stretched-link text-decoration-none" href="@article.Url">
+            <div class="card-horizontal">
+
+            </div>
+        </a>
+    </div>
 }
 
 <div class="container">
