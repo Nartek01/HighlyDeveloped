@@ -2,4 +2,6 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
     Layout = "main.cshtml";
+    var heroOverlayColour = Model.Value<string>("heroOverlayColour");
+    var articles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("newsArticles").FirstOrDefault();
 }
