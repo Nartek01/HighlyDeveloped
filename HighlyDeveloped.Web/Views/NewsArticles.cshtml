@@ -1,6 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.NewsArticles>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @using Umbraco.Core.PropertyEditors.ValueConverters;
+
 @section head {
     <style>
         .card-horizontal {
@@ -9,6 +10,7 @@
         }
     </style>
 }
+
 @{
     Layout = "main.cshtml";
     var heroOverlayColour = Model.Value<string>("heroOverlayColour");
@@ -41,7 +43,7 @@
                                 <a class="card-block stretched-link text-decoration-none" href="@article.Url">
                                     <div class="card-horizontal">
                                         <div class="img-square-wrapper">
-                                            <img src="@imageUrl" alt="" />
+                                            <img src="@imageUrl" alt=""/>
                                         </div>
                                         <div class="card-body">
                                             <h4 class="card-title pb-25">
