@@ -23,21 +23,6 @@
 
 @Html.Partial("Hero")
 
-@foreach (var article in articles.Children.OrderBy(order => order.Value<DateTime>("postDate")))
-{
-    var imageCropper = article.Value<ImageCropperValue>("articleImage");
-    var imageUrl = imageCropper.Src + imageCropper.GetCropUrl("thumb");
-
-    // Render the news card
-    <div class="card my-25">
-        <a class="card-block stretched-link text-decoration-none" href="@article.Url">
-            <div class="card-horizontal">
-
-            </div>
-        </a>
-    </div>
-}
-
 <div class="container">
     <div class="row">
         <div class="col-md-8 bg-light p-0">
@@ -46,15 +31,35 @@
                 <div class="row">
                     <div class="col p-0">
                         @* Render card  *@
+                        @foreach (var article in articles.Children.OrderBy(order => order.Value<DateTime>("postDate")))
+                        {
+                            var imageCropper = article.Value<ImageCropperValue>("articleImage");
+                            var imageUrl = imageCropper.Src + imageCropper.GetCropUrl("Thumbnail");
 
+                            // Render the news card
+                            <div class="card my-25">
+                                <a class="card-block stretched-link text-decoration-none" href="@article.Url">
+                                    <div class="card-horizontal">
+                                        <div class="img-square-wrapper">
+                                            <img src="@imageUrl" alt="" />
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="card-title pb-25">
+                                                @article.Name
+                                            </h4>
+                                            <p class="card-text">@article.Value("leadIn")</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-            Left
         </div>
-        <div class="col-md-4 bg-light">
+        <div class="col-md-4 bg-dark text-white text-center">
             @* Render the filer in the sidebar *@
-            Right
+            <h3>Filters goes here!</h3>
         </div>
     </div>
 </div>
