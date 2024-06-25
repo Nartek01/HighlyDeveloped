@@ -23,6 +23,22 @@
     var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
     // Skapa en tom string lista
     var categoryList = new List<string>();
+    
+    // Kontrollerar om 'tags' inte är null och itererar sedan genom varje 'tagArray' i 'tags'.
+    // För varje 'tag' i 'tagArray', om 'tag' inte redan finns i 'categoryList', läggs den till i listan.
+    if (tags != null)
+    {
+        foreach (var tagArray in tags)
+        {
+            foreach (var tag in tagArray)
+            {
+                if (!categoryList.Contains(tag))
+                {
+                    categoryList.Add(tag);
+                }
+            }
+        }
+    }
 }
 <style>
 	.home-hero > .overlay {
