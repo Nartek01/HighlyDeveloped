@@ -1,5 +1,6 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.NewsArticles>
 @using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Core.PropertyEditors.ValueConverters;
 @{
     Layout = "main.cshtml";
     var heroOverlayColour = Model.Value<string>("heroOverlayColour");
