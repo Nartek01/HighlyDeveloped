@@ -18,6 +18,9 @@
 
     // Hämtar alla nyhetsartiklar från Umbraco CMS. 
     var articles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("newsArticles").FirstOrDefault();
+    
+    // Hämtar kategorierna för varje nyhetsartikel från Umbraco CMS.
+    var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
 }
 <style>
 	.home-hero > .overlay {
