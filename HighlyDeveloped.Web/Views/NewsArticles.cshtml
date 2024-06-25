@@ -71,7 +71,7 @@
                 <div class="row">
                     <div class="col p-0">
                         @* Render card  *@
-                        @foreach (var article in articles.Children.OrderBy(order => order.Value<DateTime>("postDate")))
+                        @foreach (var article in news.OrderBy(order => order.Value<DateTime>("postDate")))
                         {
                             var imageCropper = article.Value<ImageCropperValue>("articleImage");
                             var imageUrl = imageCropper.Src + imageCropper.GetCropUrl("Thumbnail");
