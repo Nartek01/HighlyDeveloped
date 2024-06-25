@@ -103,7 +103,11 @@
             <ul>
                 @foreach (var category in categoryList.OrderBy(order => order))
                 {
-                    <li>@category</li>
+                    <li>
+                        <a href="@Model.Url?cat=@category">
+                            @category
+                        </a>
+                    </li>
                 }
             </ul>
         </div>
