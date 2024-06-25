@@ -21,6 +21,15 @@
     
     // Alla kategorier
     var news = articles.Children;
+
+    // This conditional block checks if the query string "cat" is not null or empty.
+    // The query string "cat" is expected to represent a category.
+    if (!string.IsNullOrEmpty(Request.QueryString["cat"]))
+    {
+        // If "cat" is not null or empty, it filters the children of 'articles' 
+        // to only include those where the 'newsCategories' contains the category specified in "cat".
+        news = articles.Children.Where(cat => cat.Value<string[]>("newsCategories").Contains(Request.QueryString["cat"]));
+    }
     // Hämtar kategorierna för varje nyhetsartikel från Umbraco CMS.
     var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
     // Skapa en tom string lista
