@@ -8,6 +8,10 @@
             display: flex;
             flex: 1 1 auto;
         }
+        
+        .active {
+            color: white;
+        }
     </style>
 }
 
@@ -115,14 +119,9 @@
                     {
                         // activeClass variablen få strängen "active"
                         activeClass = "active";
-                        <Style>
-                            #@activeClass {
-                                display: none;
-                            }
-                        </Style>
                     }
-                    <li id="@activeClass">
-                        <a href="@Model.Url?cat=@category">
+                    <li>
+                        <a class="@activeClass" href="@Model.Url?cat=@category">
                             @category
                         </a>
                     </li>
