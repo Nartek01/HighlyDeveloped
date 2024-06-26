@@ -1,25 +1,70 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.NewsArticles>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @using Umbraco.Core.PropertyEditors.ValueConverters;
+
 @section head {
     <style>
         .card-horizontal {
             display: flex;
             flex: 1 1 auto;
         }
+        
+        .active {
+            color: white;
+        }
     </style>
 }
+
 @{
     Layout = "main.cshtml";
+    // Hämtar valda Hero Overlay Färg från Umbraco Backoffice
     var heroOverlayColour = Model.Value<string>("heroOverlayColour");
+
+    // Hämtar alla nyhetsartiklar från Umbraco CMS. 
     var articles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("newsArticles").FirstOrDefault();
+
+    // Alla kategorier
+    var news = articles.Children;
+
+    // This conditional block checks if the query string "cat" is not null or empty.
+    // The query string "cat" is expected to represent a category.
+    if (!string.IsNullOrEmpty(Request.QueryString["cat"]))
+    {
+        // If "cat" is not null or empty, it filters the children of 'articles' 
+        // to only include those where the 'newsCategories' contains the category specified in "cat".
+        news = articles.Children.Where(cat => cat.Value<string[]>("newsCategories").Contains(Request.QueryString["cat"]));
+    }
+
+    // Hämtar kategorierna för varje nyhetsartikel från Umbraco CMS.
+    var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
+    // Skapa en tom string lista
+    var categoryList = new List<string>();
+
+    // Kontrollerar om 'tags' inte är null och itererar sedan genom varje 'tagArray' i 'tags'.
+    // För varje 'tag' i 'tagArray', om 'tag' inte redan finns i 'categoryList', läggs den till i listan.
+    if (tags != null)
+    {
+        foreach (var tagArray in tags)
+        {
+            foreach (var tag in tagArray)
+            {
+                if (!categoryList.Contains(tag))
+                {
+                    categoryList.Add(tag);
+                }
+            }
+        }
+    }
 }
-<style>
+@if (!string.IsNullOrEmpty(heroOverlayColour))
+{
+    <style>
 	.home-hero > .overlay {
 		background-color: #@heroOverlayColour !important;
 		opacity: 0.70 !important;
 	}
 </style>
+}
 
 @Html.Partial("Hero")
 
@@ -31,7 +76,7 @@
                 <div class="row">
                     <div class="col p-0">
                         @* Render card  *@
-                        @foreach (var article in articles.Children.OrderBy(order => order.Value<DateTime>("postDate")))
+                        @foreach (var article in news.OrderBy(order => order.Value<DateTime>("postDate")))
                         {
                             var imageCropper = article.Value<ImageCropperValue>("articleImage");
                             var imageUrl = imageCropper.Src + imageCropper.GetCropUrl("Thumbnail");
@@ -41,7 +86,7 @@
                                 <a class="card-block stretched-link text-decoration-none" href="@article.Url">
                                     <div class="card-horizontal">
                                         <div class="img-square-wrapper">
-                                            <img src="@imageUrl" alt="" />
+                                            <img src="@imageUrl" alt=""/>
                                         </div>
                                         <div class="card-body">
                                             <h4 class="card-title pb-25">
@@ -58,8 +103,30 @@
             </div>
         </div>
         <div class="col-md-4 bg-dark text-white text-center">
-            @* Render the filer in the sidebar *@
-            <h3>Filters goes here!</h3>
+            @* Render the filter in the sidebar *@
+            <h3>Categories</h3>
+            <ul>
+                <li>
+                    <a class="btn btn-primary" href="@Model.Url">Clear Filter</a>
+                </li>
+                @foreach (var category in categoryList.OrderBy(order => order))
+                {
+                    // Skapa en tom sträng för css class
+                    var activeClass = "";
+                    
+                    // Om (cat?="value") ?cat="" parameter existerar och matchar med URLen 
+                    if (category == Request.QueryString["cat"])
+                    {
+                        // activeClass variablen få strängen "active"
+                        activeClass = "active";
+                    }
+                    <li>
+                        <a class="@activeClass" href="@Model.Url?cat=@category">
+                            @category
+                        </a>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 </div>
