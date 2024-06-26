@@ -35,6 +35,25 @@
         news = articles.Children.Where(cat => cat.Value<string[]>("newsCategories").Contains(Request.QueryString["cat"]));
     }
 
+    // Paginering
+    // Hur många objekt per sidor?
+    // tot / obj per sida = sidor att visa
+    const int itemsPerPage = 5; // pageSize
+    // Hur många objekt totalt?
+    var totalPages = (int)Math.Ceiling((double)news.Count() / (double)itemsPerPage); // numPages
+    // Nuvarande sida?
+    var selectedPage = 1;
+    if (!string.IsNullOrEmpty(Request.QueryString["page"]))
+    {
+        int.TryParse(Request.QueryString["page"], out selectedPage);
+        //Range check
+        if (selectedPage <= 0 || selectedPage > totalPages)
+        {
+            selectedPage = 1;
+        }
+    }
+
+    news = news.Skip((selectedPage - 1) * itemsPerPage);
     // Hämtar kategorierna för varje nyhetsartikel från Umbraco CMS.
     var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
     // Skapa en tom string lista
@@ -42,16 +61,13 @@
 
     // Kontrollerar om 'tags' inte är null och itererar sedan genom varje 'tagArray' i 'tags'.
     // För varje 'tag' i 'tagArray', om 'tag' inte redan finns i 'categoryList', läggs den till i listan.
-    if (tags != null)
+    foreach (var tagArray in tags)
     {
-        foreach (var tagArray in tags)
+        foreach (var tag in tagArray)
         {
-            foreach (var tag in tagArray)
+            if (!categoryList.Contains(tag))
             {
-                if (!categoryList.Contains(tag))
-                {
-                    categoryList.Add(tag);
-                }
+                categoryList.Add(tag);
             }
         }
     }
@@ -101,11 +117,37 @@
                     </div>
                 </div>
             </div>
+            @* Paging *@
+            @if (totalPages > 1)
+            {
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="@(selectedPage <= 1 ? "disabled" : "") page-item">
+                                    <a class="page-link" href="@Model.Url?page=@(selectedPage - 1)">Previous</a>
+                                </li>
+
+                                @for (var i = 1; i <= totalPages; i++)
+                                {
+                                    <li class="@(selectedPage == i ? "active": "") page-item">
+                                        <a class="page-link" href="@Model.Url?page=@i">@i</a>
+                                    </li>
+                                }
+
+                                <li class="@(selectedPage >= totalPages ? "disabled" : "") page-item">
+                                    <a class="page-link" href="@Model.Url?page=@(selectedPage + 1)">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            }
         </div>
         <div class="col-md-4 bg-dark text-white text-center">
             @* Render the filter in the sidebar *@
             <h3>Categories</h3>
-            <ul>
+            <ul class="list-unstyled">
                 <li>
                     <a class="btn btn-primary" href="@Model.Url">Clear Filter</a>
                 </li>
