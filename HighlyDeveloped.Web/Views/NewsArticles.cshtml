@@ -42,7 +42,7 @@
     // Hur många objekt totalt?
     var totalPages = (int)Math.Ceiling((double)news.Count() / (double)itemsPerPage); // numPages
     // Nuvarande sida?
-    var selectedPage = 0;
+    var selectedPage = 1;
     if (!string.IsNullOrEmpty(Request.QueryString["page"]))
     {
         int.TryParse(Request.QueryString["page"], out selectedPage);
