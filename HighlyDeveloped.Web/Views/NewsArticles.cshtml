@@ -61,16 +61,12 @@
 
     // Kontrollerar om 'tags' inte är null och itererar sedan genom varje 'tagArray' i 'tags'.
     // För varje 'tag' i 'tagArray', om 'tag' inte redan finns i 'categoryList', läggs den till i listan.
-    if (tags != null)
     {
-        foreach (var tagArray in tags)
+        foreach (var tag in tagArray)
         {
-            foreach (var tag in tagArray)
+            if (!categoryList.Contains(tag))
             {
-                if (!categoryList.Contains(tag))
-                {
-                    categoryList.Add(tag);
-                }
+                categoryList.Add(tag);
             }
         }
     }
