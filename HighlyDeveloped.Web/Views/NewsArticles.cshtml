@@ -124,7 +124,7 @@
                     <div class="col">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item">
+                                <li class="@(selectedPage <= 1 ? "disabled" : "") page-item">
                                     <a class="page-link" href="@Model.Url?page=@(selectedPage - 1)">Previous</a>
                                 </li>
 
