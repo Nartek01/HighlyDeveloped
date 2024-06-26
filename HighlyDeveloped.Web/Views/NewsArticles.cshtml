@@ -35,6 +35,25 @@
         news = articles.Children.Where(cat => cat.Value<string[]>("newsCategories").Contains(Request.QueryString["cat"]));
     }
 
+    // Paginering
+    // Hur många objekt per sidor?
+    // tot / obj per sida = sidor att visa
+    const int itemsPerPage = 1; // pageSize
+    // Hur många objekt totalt?
+    var totalPages = (int)Math.Ceiling((double)news.Count() / (double)itemsPerPage); // numPages
+    // Nuvarande sida?
+    var selectedPage = 0;
+    if (!string.IsNullOrEmpty(Request.QueryString["page"]))
+    {
+        int.TryParse(Request.QueryString["page"], out selectedPage);
+        //Range check
+        if (selectedPage <= 0 || selectedPage > totalPages)
+        {
+            selectedPage = 1;
+        }
+    }
+
+    news = news.Skip((selectedPage - 1) * itemsPerPage);
     // Hämtar kategorierna för varje nyhetsartikel från Umbraco CMS.
     var tags = articles?.Children.Select(tag => tag.Value<string[]>("newsCategories"));
     // Skapa en tom string lista
