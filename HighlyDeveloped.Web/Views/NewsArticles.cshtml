@@ -61,6 +61,7 @@
 
     // Kontrollerar om 'tags' inte är null och itererar sedan genom varje 'tagArray' i 'tags'.
     // För varje 'tag' i 'tagArray', om 'tag' inte redan finns i 'categoryList', läggs den till i listan.
+    foreach (var tagArray in tags)
     {
         foreach (var tag in tagArray)
         {
@@ -116,6 +117,32 @@
                     </div>
                 </div>
             </div>
+            @* Paging *@
+            @if (totalPages > 1)
+            {
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="">Previous</a>
+                                </li>
+
+                                @for (var i = 1; i <= totalPages; i++)
+                                {
+                                    <li class="@(selectedPage == i ? "active": "") page-item">
+                                        <a class="page-link" href="@Model.Url?page=@i">@i</a>
+                                    </li>
+                                }
+
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            }
         </div>
         <div class="col-md-4 bg-dark text-white text-center">
             @* Render the filter in the sidebar *@
