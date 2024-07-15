@@ -42,3 +42,20 @@
 </header>
 <h1>Search</h1>
 @*TODO Search results here... *@
+@if (!string.IsNullOrEmpty(searchQuery))
+{
+    <section>
+        @if (resultsCount == 0 || searchResults == null)
+        {
+            <textarea>
+               Cannot find any results for @searchQuery
+            </textarea>
+        }
+        else
+        {
+            <textarea>
+               @resultsCount found results(s).
+            </textarea>
+        }
+    </section>
+}
