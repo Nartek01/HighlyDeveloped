@@ -3,6 +3,20 @@
 @{
     Layout = "main.cshtml";
     var searchQuery = Request.QueryString["query"];
+    IEnumerable<PublishedSearchResult> searchResults;
+    var resultsCount = 0;
+
+    // Is someone searching?
+    if (!string.IsNullOrEmpty(searchQuery))
+    {
+        // Pass the searchQuery to Umbraco and render the result.
+        searchResults = Umbraco.ContentQuery.Search(searchQuery, string.Empty);
+        resultsCount = searchResults != null && searchResults.Any() ? searchResults.Count() : 0;
+    }
+    else
+    {
+        searchResults = null;
+    }
     var heroOverlayColour = Model.Value<string>("heroOverlayColour");
 }
 
