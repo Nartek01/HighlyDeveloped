@@ -1,7 +1,8 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @{
-Layout = "main.cshtml";
-var heroOverlayColour = Model.Value<string>("heroOverlayColour");
+    Layout = "main.cshtml";
+    var searchQuery = Request.QueryString["query"];
+    var heroOverlayColour = Model.Value<string>("heroOverlayColour");
 }
 
 @if(!string.IsNullOrEmpty(heroOverlayColour))
@@ -17,12 +18,12 @@ var heroOverlayColour = Model.Value<string>("heroOverlayColour");
 @Html.Partial("hero")
 
 <header>
-	<form action="@Model.Url" method="get">
-		<fieldset>
-            <input type="text" name="query" placeholder="Search..."/>
+    <form action="@Model.Url" method="get">
+        <fieldset>
+            <input type="text" name="query" placeholder="Search..." />
             <button class="class-search">Search</button>
-		</fieldset>
-	</form>
+        </fieldset>
+    </form>
 </header>
 <h1>Search</h1>
 @*TODO Search results here... *@
