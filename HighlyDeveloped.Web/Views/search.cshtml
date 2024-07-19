@@ -47,15 +47,15 @@
     <section>
         @if (resultsCount == 0 || searchResults == null)
         {
-            <textarea>
+            <text>
                Cannot find any results for @searchQuery
-            </textarea>
+            </text>
         }
         else
         {
-            <textarea>
+            <text>
                @resultsCount found results(s).
-            </textarea>
+            </text>
         }
     </section>
 }
