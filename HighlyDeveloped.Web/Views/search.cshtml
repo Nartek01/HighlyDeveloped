@@ -51,24 +51,19 @@
         </div>
     </div>
 </header>
-<h1>Search</h1>
-@*TODO Search results here... *@
-@if (!string.IsNullOrEmpty(searchQuery))
-{
-    <section>
-        @if (resultsCount == 0 || searchResults == null)
-        {
-            <text>
-                Cannot find any results for @searchQuery
-            </text>
-        }
-        else
-        {
-            <text>
-                @resultsCount found results(s).
-            </text>
-            <ul>
-                @foreach (var result in searchResults)
+<section class="container">
+    @*TODO Search results here... *@
+    @if (!string.IsNullOrEmpty(searchQuery))
+    {
+        <div class="row">
+            <div class="col">
+                @if (resultsCount == 0 || searchResults == null)
+                {
+                    <text>
+                        Cannot find any results for @searchQuery
+                    </text>
+                }
+                else
                 {
                     {
                         <li>
