@@ -34,13 +34,22 @@
 <header class="jumbotron jumbotron-fluid home-hero" style="background-image:url('@heroImageUrl')">
     <div class="overlay">
 
-<header>
-    <form action="@Model.Url" method="get">
-        <fieldset>
-            <input type="text" name="query" placeholder="Search..." />
-            <button class="class-search">Search</button>
-        </fieldset>
-    </form>
+    </div>
+    <div class="inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <h1>Search</h1>
+                    <form action="@Model.Url" method="get">
+                        <fieldset>
+                            <input type="text" name="query" placeholder="Search..." />
+                            <button class="class-search">Search</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 <h1>Search</h1>
 @*TODO Search results here... *@
