@@ -2,6 +2,7 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
     Layout = "main.cshtml";
+    var heroImageUrl = Model.Value<IPublishedContent>("heroImage")?.Url ?? "";
     var searchQuery = Request.QueryString["query"];
     IEnumerable<PublishedSearchResult> searchResults;
     var resultsCount = 0;
@@ -31,6 +32,7 @@
 }
 
 @Html.Partial("hero")
+<header class="jumbotron jumbotron-fluid home-hero" style="background-image:url('@heroImageUrl')">
 
 <header>
     <form action="@Model.Url" method="get">
