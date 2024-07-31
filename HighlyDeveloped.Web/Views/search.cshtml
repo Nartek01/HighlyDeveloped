@@ -10,7 +10,7 @@
     if (!string.IsNullOrEmpty(searchQuery))
     {
         // Pass the searchQuery to Umbraco and render the result.
-        searchResults = Umbraco.ContentQuery.Search(searchQuery, string.Empty);
+        searchResults = Umbraco.ContentQuery.Search(searchQuery, string.Empty, "InternalIndex").Where(returned => returned.Content.IsDocumentType("newsArticle"));
         resultsCount = searchResults != null && searchResults.Any() ? searchResults.Count() : 0;
     }
     else
