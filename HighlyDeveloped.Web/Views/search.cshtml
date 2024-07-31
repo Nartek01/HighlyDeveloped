@@ -65,13 +65,19 @@
                 }
                 else
                 {
-                    {
-                        <li>
-                            <h3>
-                                <a href="@result.Content.Url">@result.Content.Name</a>
-                            </h3>
-                        </li>
-                    }
+                    <text>
+                        @resultsCount found results(s).
+                    </text>
+                    <ul>
+                        @foreach (var result in searchResults)
+                        {
+                            {
+                                <li>
+                                    <h3>
+                                        <a href="@result.Content.Url">@result.Content.Name</a>
+                                    </h3>
+                                </li>
+                            }
 
                 }
             </ul>
