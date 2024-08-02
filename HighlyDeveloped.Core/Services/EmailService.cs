@@ -1,4 +1,6 @@
-﻿using HighlyDeveloped.Core.Interfaces;
+﻿//EmailService.cs
+
+using HighlyDeveloped.Core.Interfaces;
 using HighlyDeveloped.Core.ViewModel;
 using System;
 using System.Linq;
