@@ -10,6 +10,12 @@ namespace HighlyDeveloped.Core.Services
     public class EmailService : IEmailService
     {
 
+        private UmbracoHelper _umbraco; // Inject UmbracoHelper into my custom EmailService.
+
+        public EmailService(UmbracoHelper umbraco)
+        {
+            _umbraco = umbraco;
+        }
             try
             {
                 using (var smtp = new SmtpClient())
