@@ -120,11 +120,6 @@ namespace HighlyDeveloped.Core.Controllers
 
         private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
         {
-            //Summary
-            // This will send out an email to site admins.
-            //Summary
-
-
             // Read the email from and to addresses
             // Get the site settings
 
