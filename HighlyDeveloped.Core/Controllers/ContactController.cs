@@ -5,6 +5,7 @@
  * 
  * HandleContactForm(): This method is called when the user submits the form. It receives the form data (as an instance of ContactFormViewModel) and can perform any necessary actions, such as sending an email or saving the data to a database.
  */
+using HighlyDeveloped.Core.Interfaces;
 using HighlyDeveloped.Core.ViewModel;
 using Newtonsoft.Json.Linq;
 using System;
@@ -24,6 +25,14 @@ namespace HighlyDeveloped.Core.Controllers
         /// This is for all operations regarding the contact form.
         /// </summary>
         /// <returns></returns>
+        
+        // Create a handle to the EmailService.cs
+        private IEmailService _emailService;
+
+        public ContactController(IEmailService emailService)
+        {
+            _emailService = emailService;
+        }
         public ActionResult RenderContactForm()
         {
             var viewModel = new ContactFormViewModel();
