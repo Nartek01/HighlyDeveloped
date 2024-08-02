@@ -47,7 +47,7 @@ namespace HighlyDeveloped.Core.Controllers
                 return CurrentUmbracoPage();
             }
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
-            if(siteSettings != null)
+            if (siteSettings != null)
             {
                 var secretKey = siteSettings.Value<string>("reCaptchaSecretKey");
                 var captchaToken = Request.Form["GoogleCaptchaToken"];
