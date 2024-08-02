@@ -294,6 +294,7 @@
     <Content Include="Views\MacroPartials\Call to Action Macro.cshtml" />
     <Content Include="Views\MacroPartials\Contact Form.cshtml" />
     <Content Include="Views\Partials\Latest Tweets.cshtml" />
+    <Content Include="Views\Search.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -361,7 +362,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57479</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57479/</IISUrl>
+          <IISUrl>http://localhost:57579/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

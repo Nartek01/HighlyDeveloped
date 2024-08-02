@@ -8,7 +8,7 @@
             display: flex;
             flex: 1 1 auto;
         }
-        
+
         .active {
             color: white;
         }
@@ -20,7 +20,7 @@
     // Hämtar valda Hero Overlay Färg från Umbraco Backoffice
     var heroOverlayColour = Model.Value<string>("heroOverlayColour");
 
-    // Hämtar alla nyhetsartiklar från Umbraco CMS. 
+    // Hämtar alla nyhetsartiklar från Umbraco CMS.
     var articles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("newsArticles").FirstOrDefault();
 
     // Alla kategorier
@@ -30,7 +30,7 @@
     // The query string "cat" is expected to represent a category.
     if (!string.IsNullOrEmpty(Request.QueryString["cat"]))
     {
-        // If "cat" is not null or empty, it filters the children of 'articles' 
+        // If "cat" is not null or empty, it filters the children of 'articles'
         // to only include those where the 'newsCategories' contains the category specified in "cat".
         news = articles.Children.Where(cat => cat.Value<string[]>("newsCategories").Contains(Request.QueryString["cat"]));
     }
@@ -39,9 +39,9 @@
     // Hur många objekt per sidor?
     // tot / obj per sida = sidor att visa
     const int itemsPerPage = 5; // pageSize
-    // Hur många objekt totalt?
+                                // Hur många objekt totalt?
     var totalPages = (int)Math.Ceiling((double)news.Count() / (double)itemsPerPage); // numPages
-    // Nuvarande sida?
+                                                                                     // Nuvarande sida?
     var selectedPage = 1;
     if (!string.IsNullOrEmpty(Request.QueryString["page"]))
     {
@@ -79,7 +79,7 @@
 		background-color: #@heroOverlayColour !important;
 		opacity: 0.70 !important;
 	}
-</style>
+    </style>
 }
 
 @Html.Partial("Hero")
@@ -102,7 +102,7 @@
                                 <a class="card-block stretched-link text-decoration-none" href="@article.Url">
                                     <div class="card-horizontal">
                                         <div class="img-square-wrapper">
-                                            <img src="@imageUrl" alt=""/>
+                                            <img src="@imageUrl" alt="" />
                                         </div>
                                         <div class="card-body">
                                             <h4 class="card-title pb-25">
@@ -155,8 +155,8 @@
                 {
                     // Skapa en tom sträng för css class
                     var activeClass = "";
-                    
-                    // Om (cat?="value") ?cat="" parameter existerar och matchar med URLen 
+
+                    // Om (cat?="value") ?cat="" parameter existerar och matchar med URLen
                     if (category == Request.QueryString["cat"])
                     {
                         // activeClass variablen få strängen "active"
