@@ -4,6 +4,9 @@ using System;
 using System.Linq;
 using System.Net.Mail;
 using Umbraco.Web;
+using Umbraco.Core.Logging;
+using HighlyDeveloped.Core.Controllers;
+
 
 namespace HighlyDeveloped.Core.Services
 {
