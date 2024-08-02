@@ -14,10 +14,13 @@ namespace HighlyDeveloped.Core.Services
     {
 
         private UmbracoHelper _umbraco; // Inject UmbracoHelper into my custom EmailService.
+        private ILogger _logger;
 
-        public EmailService(UmbracoHelper umbraco)
+
+        public EmailService(UmbracoHelper umbraco, ILogger logger)
         {
             _umbraco = umbraco;
+            _logger = logger;
         }
         public void SendContactNotificationToAdmin(ContactFormViewModel viewModel)
         {
@@ -69,7 +72,7 @@ namespace HighlyDeveloped.Core.Services
             }
             catch (Exception Error)
             {
-                Logger.Error<ContactController>("Failed to send email", Error);
+                _logger.Error<ContactController>("Failed to send email", Error);
                 // Handle the error appropriately
             }
         }
