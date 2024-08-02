@@ -69,5 +69,6 @@ namespace HighlyDeveloped.Core.Services
                 Logger.Error<ContactController>("Failed to send email", Error);
                 // Handle the error appropriately
             }
+        }
     }
 }
