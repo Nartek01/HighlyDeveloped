@@ -5,6 +5,7 @@
  * 
  * HandleContactForm(): This method is called when the user submits the form. It receives the form data (as an instance of ContactFormViewModel) and can perform any necessary actions, such as sending an email or saving the data to a database.
  */
+using HighlyDeveloped.Core.Interfaces;
 using HighlyDeveloped.Core.ViewModel;
 using Newtonsoft.Json.Linq;
 using System;
@@ -24,6 +25,14 @@ namespace HighlyDeveloped.Core.Controllers
         /// This is for all operations regarding the contact form.
         /// </summary>
         /// <returns></returns>
+        
+        // Create a handle to the EmailService.cs
+        private IEmailService _emailService;
+
+        public ContactController(IEmailService emailService)
+        {
+            _emailService = emailService;
+        }
         public ActionResult RenderContactForm()
         {
             var viewModel = new ContactFormViewModel();
@@ -47,7 +56,7 @@ namespace HighlyDeveloped.Core.Controllers
                 return CurrentUmbracoPage();
             }
             var siteSettings = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("siteSettings").FirstOrDefault();
-            if(siteSettings != null)
+            if (siteSettings != null)
             {
                 var secretKey = siteSettings.Value<string>("reCaptchaSecretKey");
                 var captchaToken = Request.Form["GoogleCaptchaToken"];
@@ -73,8 +82,8 @@ namespace HighlyDeveloped.Core.Controllers
                     Services.ContentService.SaveAndPublish(newContact);
                 }
                 // Send out an email to the site admin
-                SendContactFormReceivedEmail(viewModel);
-
+                //SendContactFormReceivedEmail(viewModel);
+                _emailService.SendContactNotificationToAdmin(viewModel);
 
                 // Return confirmation message to the user
                 TempData["status"] = "OK"; // This is necessary since we have an conditional that listens to this value on Contact Form.cshtml
@@ -120,11 +129,6 @@ namespace HighlyDeveloped.Core.Controllers
 
         private void SendContactFormReceivedEmail(ContactFormViewModel viewModel)
         {
-            //Summary
-            // This will send out an email to site admins.
-            //Summary
-
-
             // Read the email from and to addresses
             // Get the site settings
 
