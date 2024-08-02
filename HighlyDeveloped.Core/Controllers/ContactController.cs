@@ -74,7 +74,7 @@ namespace HighlyDeveloped.Core.Controllers
                 }
                 // Send out an email to the site admin
                 //SendContactFormReceivedEmail(viewModel);
-                _emailService.SendContactNotifToTheAdmin(viewmodel);
+                _emailService.SendContactNotificationToAdmin(viewmodel);
 
                 // Return confirmation message to the user
                 TempData["status"] = "OK"; // This is necessary since we have an conditional that listens to this value on Contact Form.cshtml
