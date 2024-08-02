@@ -1,12 +1,7 @@
-﻿using HighlyDeveloped.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Umbraco.Core;
+﻿using Umbraco.Core;
 using Umbraco.Core.Composing;
-using Umbraco.Core.Security;
+using HighlyDeveloped.Core.Services;
+using HighlyDeveloped.Core.Interfaces;
 
 namespace HighlyDeveloped.Core
 {
