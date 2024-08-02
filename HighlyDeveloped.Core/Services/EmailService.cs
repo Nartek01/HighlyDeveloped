@@ -1,9 +1,9 @@
 ﻿using HighlyDeveloped.Core.Interfaces;
+using HighlyDeveloped.Core.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
+using Umbraco.Web;
 
 namespace HighlyDeveloped.Core.Services
 {
